@@ -1,0 +1,57 @@
+BDT (Best Developer Team)
+Kódolási szabvány:
+-------------------------
+-------------------------
+Elnevezések:
+-------------------------
+Az elnevezések során alapvetõen az ún. Magyar Jelölést (Hungarian Notation) használjuk.
+Ennek lényege a PascalCase: az egyes szavakat nagybetûvel kezdjük, minden más
+betû pedig kicsi. Elfogadott még továbbá a szavak aláhúzásjellel (_) történõ elválasztása is.
+
+NEM használjuk azt a Hungarian Notationben elfogadott szabályt, miszerint jelöljük prefixxel
+minden esetben a változó típusát. Ezt az objektumorientált szemlélet miatt elvetjük.
+
+
+Vezérlõk a formon:
+------------------
+Az ablakon elhelyezett vezérlõkhöz rendelt változók esetén prefixben kisbetûkkel
+megjelöljük a vezérlõ típusát. Egy új fájlt nyitó gomb esetén pl. btnNewFile lesz
+a vezérlõhöz rendelt változó neve.
+
+
+Vezérõ eseménykezelõje:
+-----------------------
+Vezérlõk eseménykezelõinél elfogadjuk a Visual Studio általá felajánlott alapértelmezett nevet.
+
+
+Osztályváltozók:
+----------------
+Az osztályon belüli saját member adattagokat mindig 'm_' prefixxel kezdjük.
+Propertyk esetén nem használjuk az elõbb említett elõtagot.
+
+
+Függvények és osztályok neve:
+-----------------------------
+Függvények, osztályok elnevezésénél minden esetben egyszerûen a PascalCase-t alkalmazzuk.
+
+
+Formális paraméterek és lokális változók:
+-----------------------------------------
+A formális paramétereket és a lokális változókat kisbetûvel írjuk.
+
+
+Konstansok:
+-----------
+A konstansok neveit (az opcionális prefixek kivételével) VÉGIG NAGYBETÛVEL írjuk.
+
+
+
+
+-------------------------
+-------------------------
+Egyéb:
+-------------------------
+- Szigorúan ragaszkodunk az encapsulation elvéhez, tehát ha nyilttá kívánunk tenni egy adattagot,
+akkor elkészítjük hozzá a megfelelõ propertyt, illetve lekérdezõfüggvényt.
+- Igazodunk a Visual Studio .NET által használt jelölésekhez.
+- Angol elnevezéseket használunk
