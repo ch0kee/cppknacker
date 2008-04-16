@@ -1,0 +1,64 @@
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+Verzió : 0.3
+************
+fejlesztések
+************
+- 'Projekt létrehozása' és 'Projekt mentése másként' Formok
+- Új, leegyszerûsített könyvtárszerkezet
+- Statikus lett ProjectManager osztály (azaz minden adattagja és függvénye)
+- Kulcsszavak színezése
+- Kommentek színezése
+- Sztringek színezése
+- Kisebb szépítés a designon
+- MainForm átméretezésének/maximalizálásának tiltása átmenetileg, amíg nem méretezõdnek a komponensek
+- Új fordító : g++
+- Fordító direktívák színezése
+- Átmenetileg elérhetõ a fordítás és a futtatás g++-al
+- Verzió és nyitott projekt nevének kiírása fejlécben
+**********
+megjegyzés
+**********
+Egyelõre a kulcsszavak színezése nagyon lassú, ez más algoritmussal fog futni. Megszûnt a villogás színezéskor, de a kurzor ugrálása még mindig zavaró, lehet, hogy rtf kódot kell írni.
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+Verzió : 0.2
+************
+fejlesztések
+************
+- Lekerült a C prefix az osztályok neve elõl
+- Gyorsgombok a létezõ menükhöz
+- 'Kilépés' és 'Projekt bezárása' menügombok mûködnek
+- A fõ névtér 'C__developmentenvironment' helyett 'CppKnacker', illetve az egész project át lett nevezve erre
+- A menüszerkezet kiegészítése : 'File' = Fájl + Projekt kezelés , a Fordító beállításai (inaktív dialógus) a Fordítás menübe került 
+- Ha módosítunk egy fileon, akkor egy * lesz neve után a Tabon
+- 'Projekt mentése'-kor csak azok a fileokra hívódik meg a Save, amelyek módosultak.
+- Menthetjük a fileokat egyenként, és a 'File mentése másként' is mûködik
+- Új projektfile kiterjesztés (*.ckp) 
+- Mûködik a file kivétele a projektbõl 
+**********
+megjegyzés
+**********
+Összevonódtak a dialognyitós dolgok (File mentés/betöltés/stb.) egy ShowFileDialog függvénybe, amelyik függvénydelegáltat kap, attól függõen, hogy mit akarunk csinálni akkor a Filenévvel, ha leOKéztuk a dialogot. Így rövidült sokat a felulet.cs kódja, pontosabban át lett nevezve MainForm.cs-re
+-----------------------------------------------------------------
+-----------------------------------------------------------------
+Verzió : 0.1 
+************
+fejlesztések
+************
+- Mûködik : 'Új projekt', 'Új cpp', 'Új header', 'Projekt megnyitása', 'Projekt mentése', 'Projekt Mentés másként', 'Kilépés'
+- Fordítás a Microsoft C++ compilerrel.
+- Fordítás kimenetének (Standard Output) kiírása. 
+- CEditorPage osztály származtatva a TabPagebõl. Ezeknek van egy RichTextBox vezérlõjük. Ezekkel kezeljük a fileokat 
+- A ProjektFa minden egyes Nodeja (csomója) tartalmazza a Tag változóban a pontos elérési utat.
+- Projektkönyvtár / Bin - Itt lesz a futtatható file legenerálva 
+- Projektkönyvtár / projektnév.pro - Ez maga a projektfile 
+- A CEditorPage osztályt összekapcsoltuk egy TreeNode-al, innentõl annak a Tag változójában levõ filet kezeli
+- CProjectManager felelõs a projekt teljes vezérlésért.
+- CCompiler osztály fogja a compilert vezérelni
+**********
+megjegyzés
+**********
+A CEditorPage-ek RichTextBox vezérlõivel kezeljük a fileokat, és összekapcsoltuk egy TreeNode-dal, aminek a Tag változójában van a kezelt file elérési útja.
+-----------------------------------------------------------------
+-----------------------------------------------------------------

@@ -1,0 +1,8 @@
+obj\Debug\ResolveAssemblyReference.cache
+obj\Debug\C++developerenvironment.csproj.GenerateResource.Cache
+bin\Debug\C++developerenvironment.exe
+bin\Debug\C++developerenvironment.pdb
+obj\Debug\C++developerenvironment.exe
+obj\Debug\C++developerenvironment.pdb
+obj\Debug\CppKnacker.MainForm.resources
+obj\Debug\CppKnacker.Properties.Resources.resources
