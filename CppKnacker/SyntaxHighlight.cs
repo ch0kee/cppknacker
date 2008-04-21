@@ -10,7 +10,7 @@ namespace CppKnacker
 {
     class SyntaxHighlight : RichTextBox
     {
-        //
+        //dsfsdfsdf
         static Color m_DefaultColor = Color.Black;
         // kulcsszavak
         static Color m_KeywordColor = Color.Blue;
