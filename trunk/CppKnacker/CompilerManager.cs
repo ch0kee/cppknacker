@@ -8,7 +8,7 @@ namespace CppKnacker
 {
     static class CompilerManager
     {
-
+        //EZ AZ SVN TÉMA BIZTOS NAGYON KIRÁLY
         static string m_CompilerPath;
         static Process m_CompilerExe = new Process();
         static public void SetupCompilerPath( string compilerpath )
