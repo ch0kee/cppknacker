@@ -42,17 +42,18 @@ namespace CppKnacker
             System.IO.File.Delete(exefile);
             // fordítás
             m_CompilerExe.Start();
-            ProjectManager.Output = "Fordítás megkezdése...";
-            ProjectManager.Output = m_CompilerExe.StandardOutput.ReadToEnd();
-            ProjectManager.Output = m_CompilerExe.StandardError.ReadToEnd();
+            ProjectManager.Output.Clear();
+            ProjectManager.Output.Write("Fordítás megkezdése...");
+            ProjectManager.Output.Write(m_CompilerExe.StandardOutput.ReadToEnd());
+            ProjectManager.Output.Write(m_CompilerExe.StandardError.ReadToEnd());
             m_CompilerExe.WaitForExit();
             // exe létezésének tesztelése
             if (!System.IO.File.Exists(exefile)) 
             {
-                ProjectManager.Output = "Sikertelen fordítás.";
+                ProjectManager.Output.Write("Sikertelen fordítás.");
                 return false;
             }
-            ProjectManager.Output = "A fordítás sikeresen befejezõdött.";
+            ProjectManager.Output.Write("A fordítás sikeresen befejezõdött.");
             return true;
         }
 

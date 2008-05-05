@@ -28,7 +28,6 @@ namespace CppKnacker
         /// </summary>
         private void InitializeComponent()
         {
-            this.txtOutput = new System.Windows.Forms.TextBox();
             this.tabEditorTabs = new System.Windows.Forms.TabControl();
             this.patternBox = new System.Windows.Forms.PictureBox();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -58,20 +57,11 @@ namespace CppKnacker
             this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManual = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new System.Windows.Forms.MenuStrip();
+            this.txtOutput = new CppKnacker.CompilerOutBox();
             ((System.ComponentModel.ISupportInitialize)(this.patternBox)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.menu.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // txtOutput
-            // 
-            this.txtOutput.Location = new System.Drawing.Point(12, 551);
-            this.txtOutput.Multiline = true;
-            this.txtOutput.Name = "txtOutput";
-            this.txtOutput.ReadOnly = true;
-            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.txtOutput.Size = new System.Drawing.Size(968, 103);
-            this.txtOutput.TabIndex = 3;
             // 
             // tabEditorTabs
             // 
@@ -322,15 +312,25 @@ namespace CppKnacker
             this.menu.TabIndex = 0;
             this.menu.Text = "menu";
             // 
+            // txtOutput
+            // 
+            this.txtOutput.Location = new System.Drawing.Point(7, 549);
+            this.txtOutput.Multiline = true;
+            this.txtOutput.Name = "txtOutput";
+            this.txtOutput.ReadOnly = true;
+            this.txtOutput.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.txtOutput.Size = new System.Drawing.Size(973, 96);
+            this.txtOutput.TabIndex = 2;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(992, 666);
+            this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.patternBox);
             this.Controls.Add(this.tabEditorTabs);
-            this.Controls.Add(this.txtOutput);
             this.Controls.Add(this.menu);
             this.Controls.Add(this.groupBox1);
             this.MainMenuStrip = this.menu;
@@ -351,7 +351,6 @@ namespace CppKnacker
 
         #endregion
 
-        public System.Windows.Forms.TextBox txtOutput;
         private System.Windows.Forms.TabControl tabEditorTabs;
         private System.Windows.Forms.PictureBox patternBox;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -381,6 +380,7 @@ namespace CppKnacker
         private System.Windows.Forms.ToolStripMenuItem menuHelp;
         private System.Windows.Forms.ToolStripMenuItem menuManual;
         private System.Windows.Forms.MenuStrip menu;
+        private CompilerOutBox txtOutput;
     }
 }
 

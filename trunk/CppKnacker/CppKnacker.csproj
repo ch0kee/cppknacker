@@ -42,6 +42,12 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CompilerManager.cs" />
+    <Compile Include="CompilerOutBox.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="CompilerOutBox.Designer.cs">
+      <DependentUpon>CompilerOutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditorField.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -67,6 +73,10 @@
     <Compile Include="ProjectManager.cs">
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CompilerOutBox.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CompilerOutBox.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MainForm.resx">
       <SubType>Designer</SubType>
       <DependentUpon>MainForm.cs</DependentUpon>
