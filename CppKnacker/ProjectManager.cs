@@ -16,7 +16,7 @@ namespace CppKnacker
         public static IntelNodeProject ProjectNode { get { return m_ProjectNode; } }
         //////////////////////////////////////////////////////////////////////////
         // statikus projektmanager beállítása **
-        public static void Initialize(TreeView projecttree, TabControl filestab, PictureBox patternbox, TextBox output)
+        public static void Initialize(TreeView projecttree, TabControl filestab, PictureBox patternbox, CompilerOutBox output)
         {
             m_ProjectTree = projecttree;
             EditorField.SizePattern = patternbox.Size;
@@ -178,25 +178,13 @@ namespace CppKnacker
         public static bool ProjectIsOpened
         {get{return m_ProjectNode.TreeView == m_ProjectTree;} }  //fel van csatolva a projektfára
         //////////////////////////////////////////////////////////////////////////
-        // kimenetre írás sortöréssel
-        public static string Output
-        {
-            set
-            {
-                m_OutPut.AppendText(value + "\r\n");
-                m_OutPut.ScrollToCaret();
-            }
-        }
-        //////////////////////////////////////////////////////////////////////////
-        // módosították-e a projektet az utolsó mentés óta
-        public static bool IsModified()
-        {
-            return true;
-        }
+        // kimenetre írás
+        public static CompilerOutBox Output
+        { get{return m_OutPut;} }
         //////////////////////////////////////////////////////////////////////////
         private static TreeView m_ProjectTree;
         private static TabControl m_FilesTabCtrl;
-        private static TextBox m_OutPut;
+        private static CompilerOutBox m_OutPut;
         private static IntelNodeProject m_ProjectNode = new IntelNodeProject();
         //////////////////////////////////////////////////////////////////////////
         // projekt másolása megadott helyre
@@ -208,9 +196,6 @@ namespace CppKnacker
                 System.IO.File.Copy(GetFullPath(file), Path.GetDirectoryName(newprojectfiledest) + @"\" + file.Text);
             }
         }
-        //////////////////////////////////////////////////////////////////////////
-        //////////////////////////////////////////////////////////////////////////
-        // a szoftver bemutatásához átmeneti kiegészítések : by ch0kee
         static public IntelNodeSource[] SourceNodes
         {
             get 
