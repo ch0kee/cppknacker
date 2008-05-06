@@ -56,6 +56,7 @@ namespace CppKnacker
             this.menuCompilerSettings = new System.Windows.Forms.ToolStripMenuItem();
             this.menuHelp = new System.Windows.Forms.ToolStripMenuItem();
             this.menuManual = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuNevjegy = new System.Windows.Forms.ToolStripMenuItem();
             this.menu = new System.Windows.Forms.MenuStrip();
             this.txtOutput = new CppKnacker.CompilerOutBox();
             ((System.ComponentModel.ISupportInitialize)(this.patternBox)).BeginInit();
@@ -287,7 +288,8 @@ namespace CppKnacker
             // menuHelp
             // 
             this.menuHelp.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.menuManual});
+            this.menuManual,
+            this.menuNevjegy});
             this.menuHelp.Name = "menuHelp";
             this.menuHelp.Size = new System.Drawing.Size(63, 20);
             this.menuHelp.Text = "Segítség";
@@ -296,8 +298,15 @@ namespace CppKnacker
             // 
             this.menuManual.Name = "menuManual";
             this.menuManual.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.menuManual.Size = new System.Drawing.Size(146, 22);
+            this.menuManual.Size = new System.Drawing.Size(152, 22);
             this.menuManual.Text = "Kézikönyv";
+            // 
+            // menuNevjegy
+            // 
+            this.menuNevjegy.Name = "menuNevjegy";
+            this.menuNevjegy.Size = new System.Drawing.Size(152, 22);
+            this.menuNevjegy.Text = "Névjegy";
+            this.menuNevjegy.Click += new System.EventHandler(this.menuNevjegy_Click);
             // 
             // menu
             // 
@@ -381,6 +390,7 @@ namespace CppKnacker
         private System.Windows.Forms.ToolStripMenuItem menuManual;
         private System.Windows.Forms.MenuStrip menu;
         private CompilerOutBox txtOutput;
+        private System.Windows.Forms.ToolStripMenuItem menuNevjegy;
     }
 }
 

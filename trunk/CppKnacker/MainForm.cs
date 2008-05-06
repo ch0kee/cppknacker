@@ -194,6 +194,13 @@ namespace CppKnacker
             else if (ShowFileDialog(new OpenFileDialog(), "g++ tallózása", "g++ alkalmazás (g++.exe)|g++.exe", CompilerManager.SetupCompilerPath))
                 menuCompile.Enabled = true;
         }
+
+        private void menuNevjegy_Click(object sender, EventArgs e)
+        {
+            HelpForm newhelpform = new HelpForm();
+            newhelpform.ShowDialog();
+        }
+
      
     }
 }
