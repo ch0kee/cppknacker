@@ -30,6 +30,7 @@ namespace CppKnacker
         public new void LoadFile(string filename)
         {
             base.LoadFile(filename, RichTextBoxStreamType.PlainText);
+            base.Parse(true);
             MarkAsSaved();
         }
         //////////////////////////////////////////////////////////////////////////
