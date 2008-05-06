@@ -1,0 +1,11 @@
+D:\SVN-CppKnacker\CppKnacker\obj\Debug\CppKnacker.exe
+D:\SVN-CppKnacker\CppKnacker\obj\Debug\CppKnacker.pdb
+D:\SVN-CppKnacker\CppKnacker\bin\Debug\CppKnacker.exe
+D:\SVN-CppKnacker\CppKnacker\bin\Debug\CppKnacker.pdb
+D:\SVN-CppKnacker\CppKnacker\obj\Debug\ResolveAssemblyReference.cache
+D:\SVN-CppKnacker\CppKnacker\obj\Debug\CppKnacker.CompilerOutBox.resources
+D:\SVN-CppKnacker\CppKnacker\obj\Debug\CppKnacker.HelpForm.resources
+D:\SVN-CppKnacker\CppKnacker\obj\Debug\CppKnacker.MainForm.resources
+D:\SVN-CppKnacker\CppKnacker\obj\Debug\CppKnacker.ProjectForm.resources
+D:\SVN-CppKnacker\CppKnacker\obj\Debug\CppKnacker.Properties.Resources.resources
+D:\SVN-CppKnacker\CppKnacker\obj\Debug\CppKnacker.csproj.GenerateResource.Cache
