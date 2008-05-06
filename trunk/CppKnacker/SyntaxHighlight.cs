@@ -95,6 +95,8 @@ namespace CppKnacker
             int start_char = this.GetFirstCharIndexFromLine(line);
             int end_char = start_char;
             while (end_char < TextLength && Text[end_char] != '\n') ++end_char;
+            int linestart = start_char;
+            int lineend = end_char;
             // kiszûrjük a kommentblokkokat, azokat nem színezzük
             // külsõ kommentblokk szerinti szûkítés
             for (; start_char <= end_char && IsInComment(start_char); ++start_char) ;
@@ -102,8 +104,12 @@ namespace CppKnacker
             // belsõ kommentblokkokat a sztringeknek megfelelõen színezzük
             ColorizeInterval(start_char, end_char);
             // ha van nyitó vagy csukó kommentjel a sorban, újraparse innentõl
-            if (Lines.Length > 0 && (Lines[line].Contains("/*") || Lines[line].Contains("*/")))
-                return line + 1;
+            if (lineend > linestart && linestart >= 0 && lineend < TextLength)
+            {
+                string linestr = Text.Substring(linestart, lineend - linestart + 1);
+                if (linestr.Contains("/*") || linestr.Contains("*/"))
+                    return line + 1;
+            }
             return -1;
         }
         void ColorizeInterval(int startchar, int endchar)
@@ -240,7 +246,7 @@ namespace CppKnacker
                     if (cb.end == -1)
                         cb.end = TextLength - 1;                
                     m_CommentBlocks.Add(cb);
-                    find = cb.end;
+                    find = cb.end+2;
                 }
             }
         }
