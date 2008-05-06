@@ -325,9 +325,9 @@ namespace CppKnacker
        // private static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
         public static extern int SendMessage(IntPtr hWnd, int msg, int wParam, ref Point lParam);
         //  lngResult = SendMessage(btn1.Handle, WM_LBUTTONUP, IntPtr.Zero, IntPtr.Zero);
-        const int WM_USER = 1024;
-        const int EM_GETSCROLLPOS = WM_USER + 221;
-        const int EM_SETSCROLLPOS = WM_USER + 222;
+        const int WM_USER = 0x400;
+        const int EM_GETSCROLLPOS = 0x4dd;
+        const int EM_SETSCROLLPOS = 0x4de;
         public Point ScrollPos
         {
             get

@@ -40,5 +40,7 @@ namespace CppKnacker
         {
             m_Editor.LoadFile(ProjectManager.GetFullPath(m_Node));
         }
+
+        public EditorField Editor { get { return m_Editor; } }
     }
 }

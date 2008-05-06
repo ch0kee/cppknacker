@@ -47,6 +47,12 @@ namespace CppKnacker
             this.toolStripSeparator3 = new System.Windows.Forms.ToolStripSeparator();
             this.menuExit = new System.Windows.Forms.ToolStripMenuItem();
             this.menuEditing = new System.Windows.Forms.ToolStripMenuItem();
+            this.kivágToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.másolToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.beszúrToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.törölToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.toolStripSeparator6 = new System.Windows.Forms.ToolStripSeparator();
+            this.mindenKiválasztToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCompiling = new System.Windows.Forms.ToolStripMenuItem();
             this.menuCompileAndRun = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
@@ -224,9 +230,56 @@ namespace CppKnacker
             // 
             // menuEditing
             // 
+            this.menuEditing.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.kivágToolStripMenuItem,
+            this.másolToolStripMenuItem,
+            this.beszúrToolStripMenuItem,
+            this.törölToolStripMenuItem,
+            this.toolStripSeparator6,
+            this.mindenKiválasztToolStripMenuItem});
             this.menuEditing.Name = "menuEditing";
             this.menuEditing.Size = new System.Drawing.Size(77, 20);
             this.menuEditing.Text = "Szerkesztés";
+            // 
+            // kivágToolStripMenuItem
+            // 
+            this.kivágToolStripMenuItem.Name = "kivágToolStripMenuItem";
+            this.kivágToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.kivágToolStripMenuItem.Text = "Kivág";
+            this.kivágToolStripMenuItem.Click += new System.EventHandler(this.kivágToolStripMenuItem_Click);
+            // 
+            // másolToolStripMenuItem
+            // 
+            this.másolToolStripMenuItem.Name = "másolToolStripMenuItem";
+            this.másolToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.másolToolStripMenuItem.Text = "Másol";
+            this.másolToolStripMenuItem.Click += new System.EventHandler(this.másolToolStripMenuItem_Click);
+            // 
+            // beszúrToolStripMenuItem
+            // 
+            this.beszúrToolStripMenuItem.Name = "beszúrToolStripMenuItem";
+            this.beszúrToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.beszúrToolStripMenuItem.Text = "Beszúr";
+            this.beszúrToolStripMenuItem.Click += new System.EventHandler(this.beszúrToolStripMenuItem_Click);
+            // 
+            // törölToolStripMenuItem
+            // 
+            this.törölToolStripMenuItem.Name = "törölToolStripMenuItem";
+            this.törölToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.törölToolStripMenuItem.Text = "Töröl";
+            this.törölToolStripMenuItem.Click += new System.EventHandler(this.törölToolStripMenuItem_Click);
+            // 
+            // toolStripSeparator6
+            // 
+            this.toolStripSeparator6.Name = "toolStripSeparator6";
+            this.toolStripSeparator6.Size = new System.Drawing.Size(159, 6);
+            // 
+            // mindenKiválasztToolStripMenuItem
+            // 
+            this.mindenKiválasztToolStripMenuItem.Name = "mindenKiválasztToolStripMenuItem";
+            this.mindenKiválasztToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.mindenKiválasztToolStripMenuItem.Text = "Minden kiválaszt";
+            this.mindenKiválasztToolStripMenuItem.Click += new System.EventHandler(this.mindenKiválasztToolStripMenuItem_Click);
             // 
             // menuCompiling
             // 
@@ -298,13 +351,13 @@ namespace CppKnacker
             // 
             this.menuManual.Name = "menuManual";
             this.menuManual.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.menuManual.Size = new System.Drawing.Size(152, 22);
+            this.menuManual.Size = new System.Drawing.Size(146, 22);
             this.menuManual.Text = "Kézikönyv";
             // 
             // menuNevjegy
             // 
             this.menuNevjegy.Name = "menuNevjegy";
-            this.menuNevjegy.Size = new System.Drawing.Size(152, 22);
+            this.menuNevjegy.Size = new System.Drawing.Size(146, 22);
             this.menuNevjegy.Text = "Névjegy";
             this.menuNevjegy.Click += new System.EventHandler(this.menuNevjegy_Click);
             // 
@@ -391,6 +444,12 @@ namespace CppKnacker
         private System.Windows.Forms.MenuStrip menu;
         private CompilerOutBox txtOutput;
         private System.Windows.Forms.ToolStripMenuItem menuNevjegy;
+        private System.Windows.Forms.ToolStripMenuItem kivágToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem másolToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem beszúrToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem törölToolStripMenuItem;
+        private System.Windows.Forms.ToolStripSeparator toolStripSeparator6;
+        private System.Windows.Forms.ToolStripMenuItem mindenKiválasztToolStripMenuItem;
     }
 }
 
