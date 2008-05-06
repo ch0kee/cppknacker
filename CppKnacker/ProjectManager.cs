@@ -157,6 +157,13 @@ namespace CppKnacker
             }
             AddNewTab(node);
         }
+        static public EditorPage  ActiveTab
+        {
+            get
+            {
+                return m_FilesTabCtrl.SelectedTab as EditorPage;
+            }
+        }
         //////////////////////////////////////////////////////////////////////////
         // tab hozzáadása
         private static void AddNewTab(IntelNodeFile node)

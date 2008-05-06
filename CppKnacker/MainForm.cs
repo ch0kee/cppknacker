@@ -201,6 +201,37 @@ namespace CppKnacker
             newhelpform.ShowDialog();
         }
 
+
+        private void kivágToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ProjectManager.ActiveTab != null)
+                ProjectManager.ActiveTab.Editor.Cut();
+        }
+
+        private void másolToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ProjectManager.ActiveTab != null)
+                ProjectManager.ActiveTab.Editor.Copy();
+        }
+
+        private void beszúrToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ProjectManager.ActiveTab != null)
+                ProjectManager.ActiveTab.Editor.Paste();
+        }
+
+        private void törölToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ProjectManager.ActiveTab != null)
+                ProjectManager.ActiveTab.Editor.Cut();
+        }
+
+        private void mindenKiválasztToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (ProjectManager.ActiveTab != null)
+                ProjectManager.ActiveTab.Editor.SelectAll();
+        }
+
      
     }
 }
