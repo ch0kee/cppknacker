@@ -31,7 +31,7 @@ namespace CppKnacker
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.linkLabel1 = new System.Windows.Forms.LinkLabel();
+            this.link = new System.Windows.Forms.LinkLabel();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
@@ -67,15 +67,16 @@ namespace CppKnacker
             this.label3.TabIndex = 2;
             this.label3.Text = "Best Developer Team";
             // 
-            // linkLabel1
+            // link
             // 
-            this.linkLabel1.AutoSize = true;
-            this.linkLabel1.Location = new System.Drawing.Point(25, 242);
-            this.linkLabel1.Name = "linkLabel1";
-            this.linkLabel1.Size = new System.Drawing.Size(229, 13);
-            this.linkLabel1.TabIndex = 3;
-            this.linkLabel1.TabStop = true;
-            this.linkLabel1.Text = "http://people.inf.elte.hu/ch0kee/progtek2.html";
+            this.link.AutoSize = true;
+            this.link.Location = new System.Drawing.Point(25, 242);
+            this.link.Name = "link";
+            this.link.Size = new System.Drawing.Size(229, 13);
+            this.link.TabIndex = 3;
+            this.link.TabStop = true;
+            this.link.Text = "http://people.inf.elte.hu/ch0kee/progtek2.html";
+            this.link.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_LinkClicked);
             // 
             // label4
             // 
@@ -122,7 +123,7 @@ namespace CppKnacker
             this.Controls.Add(this.label6);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.label4);
-            this.Controls.Add(this.linkLabel1);
+            this.Controls.Add(this.link);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
@@ -140,7 +141,7 @@ namespace CppKnacker
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.LinkLabel linkLabel1;
+        private System.Windows.Forms.LinkLabel link;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label6;

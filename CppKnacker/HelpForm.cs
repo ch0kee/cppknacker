@@ -14,5 +14,13 @@ namespace CppKnacker
         {
             InitializeComponent();
         }
+
+        private void link_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            System.Diagnostics.Process.Start("IExplore", "http://people.inf.elte.hu/ch0kee/progtek2.html");
+
+            link.LinkVisited = true;
+
+        }
     }
 }
