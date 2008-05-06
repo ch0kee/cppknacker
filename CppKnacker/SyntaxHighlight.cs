@@ -295,14 +295,12 @@ namespace CppKnacker
         }
         // parse
         int m_PreviousTextLength;
-        bool m_NeedReparseAll = false;
         protected override void OnTextChanged(EventArgs e)
         {
             SetCommentBlocks();
-            Parse(m_NeedReparseAll || System.Math.Abs(m_PreviousTextLength - TextLength) > 1);
+            Parse(System.Math.Abs(m_PreviousTextLength - TextLength) > 1);
             base.OnTextChanged(e);
             m_PreviousTextLength = TextLength;
-            m_NeedReparseAll = false;
         }
         //////////////////////////////////////////////////////////////////////////
         // villogás megszüntetése
