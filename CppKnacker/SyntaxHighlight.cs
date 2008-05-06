@@ -7,6 +7,7 @@ using System.Windows;
 using System.Collections;
 using System.Collections.Specialized;
 using System.Runtime.InteropServices;
+using System.Text.RegularExpressions;
 
 namespace CppKnacker
 {
@@ -28,6 +29,8 @@ namespace CppKnacker
         static readonly Color m_CommentColor = Color.Green;
         //sztringek
         static readonly Color m_StringColor = Color.Red;
+        // függvények (teszt)
+        static readonly Color m_FunctionColor = Color.Firebrick;
 
         //módosított keresõ, amely a rákövetkezõ és megelõzõ _ jelre nem ad találatot, pl.: _int
         int FindWord(string text, int start, int end, RichTextBoxFinds options)
@@ -147,6 +150,14 @@ namespace CppKnacker
                 // direktívák színezése
                 foreach (string directive in m_DirectiveStrings)
                     ColorizeStartWord(directive, m_DirectiveColor, b.start, b.end);
+                // függvények
+                Regex   functionfinder = new Regex("\\b\\s*[A-Za-z]+\\s*\\(");
+                foreach (Match m in functionfinder.Matches(Text.Substring(b.start, b.end - b.start + 1)))
+                {
+                    Select(b.start + m.Index, m.Length - 1);
+                    if (SelectionColor == m_DefaultColor)
+                        SelectionColor = m_FunctionColor;
+                }
             }
         }
 
