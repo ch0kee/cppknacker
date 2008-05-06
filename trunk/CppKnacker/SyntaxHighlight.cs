@@ -44,9 +44,24 @@ namespace CppKnacker
         // biztonságos keresõ, ami érvénytelen indexhatárokra sem rontja el a keresést
         int SafeFind(string text, int start, int end, RichTextBoxFinds options)
         {
-            if (start < 0) start = 0;
-            if (end > TextLength - 1) end = TextLength - 1;
+            if (start < 0) return -1;
+            if (end > TextLength - 1) return -1;
             return (end <= start) ? -1 : this.Find(text, start, end, options);
+        }
+        // megkeresi az összes elõfordulást
+        List<int> SafeFindAll(string text, int start, int end, RichTextBoxFinds options, bool searchInComments)
+        {
+            List<int> results = new List<int>();
+            bool searchagain = false;
+            do 
+            {
+                int found = SafeFind(text,start,end,options);
+                if (searchagain = found != -1)
+                    if (!searchInComments && !IsInComment(found) || searchInComments)
+                        results.Add(found);
+                start = found+1;
+            } while (searchagain);
+            return results;
         }
         // teljes szöveg, vagy egy sor színezése
         public void Parse(bool wholetext)
@@ -84,7 +99,7 @@ namespace CppKnacker
             int firstchar = GetFirstCharIndexFromLine(GetLineFromCharIndex(charindex));
             int dquotesctr = 0;
             for(int i = firstchar; i < charindex; ++i)
-                if (Text[i] == '"' && !IsInComment(i))
+                if (Text[i] == '\"' && !IsInComment(i))
                     ++dquotesctr;
             return dquotesctr % 2 != 0;
         }
@@ -95,6 +110,7 @@ namespace CppKnacker
             int start_char = this.GetFirstCharIndexFromLine(line);
             int end_char = start_char;
             while (end_char < TextLength && Text[end_char] != '\n') ++end_char;
+            if (end_char == TextLength) end_char = TextLength - 1;
             int linestart = start_char;
             int lineend = end_char;
             // kiszûrjük a kommentblokkokat, azokat nem színezzük
@@ -120,7 +136,7 @@ namespace CppKnacker
             // komment keresése
             endchar = ColorizeFrom("//", m_CommentColor, startchar, endchar);
             // sztring és c stílusú blokkok színezése
-            List<block> StringDelimitedBlocks = CollectIntervals('\"'.ToString(), '\"'.ToString(), startchar, endchar);
+            List<block> StringDelimitedBlocks = CollectIntervals('\"'.ToString(), startchar, endchar);
             ColorizeBetweenBlocks(StringDelimitedBlocks, m_StringColor);  // beszínezzük közöttük
             //  List<block> I2 = CollectIntervals("/*", "*/", startchar, endchar);
             foreach (block b in StringDelimitedBlocks)
@@ -143,28 +159,26 @@ namespace CppKnacker
             }
         }
         // felvágja intervallumokra a szakaszt, a kihagyott részt színezi
-        private List<block> CollectIntervals(string sm, string em, int startchar, int endchar)
+        private List<block> CollectIntervals(string mark, int startchar, int endchar)
         {
             List<block> intervals = new List<block>();
-            int blockstart = startchar;
-            int blockend = blockstart;
-            while (blockstart < endchar)
+            int[] finds = SafeFindAll(mark, startchar, endchar, RichTextBoxFinds.NoHighlight,false).ToArray();
+            // párosítás
+            if (finds.Length > 0)
             {
-                // blokkvége beállítása
-                blockend = SafeFind(sm, blockend, endchar, RichTextBoxFinds.NoHighlight);
-                if (blockend == -1)
-                    blockend = endchar;
-                // blokk felvétele ha nincs kikommentezve
-                if (!IsInComment(blockstart) && !IsInComment(blockend))
-                    intervals.Add(new block(blockstart, blockend));
-                // blokkezdés beállítása
-                blockstart = SafeFind(em, blockend + sm.Length, endchar, RichTextBoxFinds.NoHighlight);
-                if (blockstart == -1)
-                    blockstart = endchar;
-                blockend = blockstart + sm.Length;
+                intervals.Add(new block(startchar, finds[0]));
+                for (int j = 2; j < finds.Length; j+=2)
+                    intervals.Add(new block(finds[j-1], finds[j]));
+
+                if (finds.Length % 2 == 0)// páratlan (van nyitott)
+                    intervals.Add(new block(finds[finds.Length-1], endchar));
+                else
+                    intervals.Add(new block(endchar, endchar));
+
+            } else
+            {
+                intervals.Add(new block(startchar, endchar));
             }
-            // lezáró blokk
-            intervals.Add(new block(endchar - 1, endchar));
             return intervals;
         }
         //////////////////////////////////////////////////////////////////////////
@@ -239,14 +253,19 @@ namespace CppKnacker
                 find = SafeFind("/*", find, TextLength - 1, RichTextBoxFinds.NoHighlight);
                 if (find != -1)
                 {
-                    block cb = new block();
-                    cb.start = find;
-                    // keressük meg a párját
-                    cb.end = SafeFind("*/", find + 2, TextLength - 1, RichTextBoxFinds.NoHighlight);
-                    if (cb.end == -1)
-                        cb.end = TextLength - 1;                
-                    m_CommentBlocks.Add(cb);
-                    find = cb.end+2;
+                    if (!IsInString(find))
+                    {
+                        block cb = new block();
+                        cb.start = find;
+                        // keressük meg a párját
+                        cb.end = SafeFind("*/", find + 2, TextLength - 1, RichTextBoxFinds.NoHighlight);
+                        if (cb.end == -1 )
+                            cb.end = TextLength - 1;
+                        m_CommentBlocks.Add(cb);
+                        find = cb.end + 2;
+                    }
+                        else find += 2; // ha sztringben van nézzük tovább
+
                 }
             }
         }
@@ -266,7 +285,7 @@ namespace CppKnacker
         {
             int last_non_colored_char = to;
             int startindex = SafeFind(marker, from, to, RichTextBoxFinds.NoHighlight | RichTextBoxFinds.MatchCase);
-            if (startindex != -1) // talált 
+            if (startindex != -1 && !IsInString(startindex)) // talált 
             {
                 last_non_colored_char = startindex - 1;
                 this.Select(startindex, to - startindex + 1);
