@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
@@ -14,12 +15,16 @@ namespace CppKnacker
         public static Size SizePattern { set { m_SizePattern = value; } }
         bool m_IsModified = false;
         EditorPage m_Page;
+        int m_RegionStart;
+        int m_RegionLength;
         public EditorField(EditorPage page)
         {
             Size = m_SizePattern;
             Name = page.Text;
             AcceptsTab = true;
             m_Page = page;
+            m_RegionStart = 0;
+            m_RegionLength = 0;
             Font = new Font("Courier New", 10);
             ContextMenu = new ContextMenu();
             ContextMenu.MenuItems.Add(new MenuItem("Mentés",OnContextMenuSave));
@@ -46,7 +51,7 @@ namespace CppKnacker
         // ha megváltozik a szöveg
         protected override void OnTextChanged(EventArgs e)
         {
-         //   HandleIntendation();
+            HandleIntendation();
             if (!m_IsModified)
                 MarkAsModified();
             base.OnTextChanged(e);
@@ -91,34 +96,64 @@ namespace CppKnacker
         }
         //////////////////////////////////////////////////////////////////////////
         // Enterre bejjebb kell kezdeni
-        void HandleIntendation()
+        protected void HandleIntendation()
         {
-            int lastindex = LastCharacter;
-
-            if (lastindex == -1)
-                return;
-            //
-            if ( Text[lastindex] == '{')
+            SelectRegion();
+            if (m_RegionLength > 0)
             {
-                Select(SelectionStart, 1);
-                this.SelectedText += "}";
-                DeselectAll();
+                ((RichTextBox)this).Select(m_RegionStart, m_RegionLength);
+                ((RichTextBox)this).SelectionIndent += 3;
+                ((RichTextBox)this).DeselectAll();
             }
         }
         //////////////////////////////////////////////////////////////////////////
         // segédfüggvények, propertyk
-        int LastCharacter // utolsó nem whitespace karakter a kurzortól vissza
+        protected void SelectRegion()
         {
-            get
+
+            if (Text.Length == 0) return;   //ures a szerkeszto
+            else
             {
-                if (Text.Length == 0) return -1;
-                for (int i = SelectionStart-1; i >= 0; --i)
+                int f = m_RegionStart;
+                f = Find("{", f, RichTextBoxFinds.WholeWord);   //az elso nyitozarojel
+                if (f == -1)
                 {
-                    if (Text[i] != '\t' && Text[i] != ' ')
-                        return i;
+                    m_RegionLength = 0;
+                    return;
                 }
-                return -1;
+                
+                if (f + 1 < Text.Length)
+                {
+                    int ItsPair = f + 1;
+                    int OpenBrackets = 0;
+                    //amig nem ertunk az editor vegere es nem talaltuk meg a parjat
+                    while (ItsPair < Text.Length && (Text[ItsPair] != '}' || OpenBrackets > 0))
+                    {
+                        if (Text[ItsPair] == '{')
+                            ++OpenBrackets;
+                        else if (Text[ItsPair] == '}')
+                            --OpenBrackets;
+                        ++ItsPair;
+                    }
+                    if (ItsPair < Text.Length)  //ha megvan a parja
+                    {
+                        MessageBox.Show("start: " + m_RegionStart + ", ItsPair: " + ItsPair + ", Text.Length: " + Text.Length);
+                        m_RegionStart = f;
+                        m_RegionLength = ItsPair - f + 1;
+                        MessageBox.Show("start: " + m_RegionStart + ", length: " + m_RegionLength);
+                    }
+                    else
+                    {
+                        m_RegionStart = f;
+                        m_RegionLength = Text.Length - f;
+                    }
+                }
+                else
+                {
+                    m_RegionLength = 0;
+                }
             }
         }
+
     }
 }
