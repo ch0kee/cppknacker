@@ -6,6 +6,7 @@ using System.Drawing;
 using System.Windows;
 using System.Collections;
 using System.Collections.Specialized;
+using System.Runtime.InteropServices;
 
 namespace CppKnacker
 {
@@ -34,16 +35,17 @@ namespace CppKnacker
             int ret = SafeFind(text, start, end, options);
             if (ret != -1)
             {
-                if (ret + text.Length < TextLength  && Text[ret + text.Length] == '_'
-                    || ret - 1 > 0                  && Text[ret - 1] == '_')
+                if (ret + text.Length < TextLength && Text[ret + text.Length] == '_'
+                    || ret - 1 > 0 && Text[ret - 1] == '_')
                     ret = -1;
             }
-            return ret;   
+            return ret;
         }
         // biztonságos keresõ, ami érvénytelen indexhatárokra sem rontja el a keresést
         int SafeFind(string text, int start, int end, RichTextBoxFinds options)
         {
-            if (start < 0 || end > TextLength - 1) return -1;
+            if (start < 0) start = 0;
+            if (end > TextLength - 1) end = TextLength - 1;
             return (end <= start) ? -1 : this.Find(text, start, end, options);
         }
         // teljes szöveg, vagy egy sor színezése
@@ -53,21 +55,41 @@ namespace CppKnacker
             Color savcolor = this.SelectionColor;
             //////////////////////////////////////////////////////////////////////////
             m_EnablePaint = false;
-            SetCommentBlocks();
-            ColorizeCommentBlocks();
-
+            Point savedscrollpos = ScrollPos;
             if (wholetext)
+            {
                 for (int i = 0; i < Lines.Length; ++i)
                     ColorizeLine(i);
+            }
             else
-                ColorizeLine(GetLineFromCharIndex(SelectionStart));
+            {
+                int current_line = GetLineFromCharIndex(savselection[0]);
+                int parsefromline = ColorizeLine(current_line);
+                if (Lines.Length > 0 && 0 <= parsefromline && parsefromline < Lines.Length)
+                {
+                    for (int i = parsefromline; i < Lines.Length; ++i)
+                        ColorizeLine(i);
+                }
+            }
+            ColorizeCommentBlocks();
             SelectionStart = savselection[0]; SelectionLength = savselection[1];
             SelectionColor = savcolor;
+            ScrollPos = savedscrollpos;
             m_EnablePaint = true;
             //////////////////////////////////////////////////////////////////////////
         }
-        // egy sor színezése
-        void ColorizeLine(int line)
+        bool IsInString(int charindex)
+        {
+            // akkor vagyunk sztringben, ha a megelõzõ nemkommentben lévõ idézõjelek száma páratlan
+            int firstchar = GetFirstCharIndexFromLine(GetLineFromCharIndex(charindex));
+            int dquotesctr = 0;
+            for(int i = firstchar; i < charindex; ++i)
+                if (Text[i] == '"' && !IsInComment(i))
+                    ++dquotesctr;
+            return dquotesctr % 2 != 0;
+        }
+        // egy sor színezése, visszatérési érték a következõ parsolandó sor
+        int ColorizeLine(int line)
         {
             // sor elsõ és utolsó karakterének megkeresése
             int start_char = this.GetFirstCharIndexFromLine(line);
@@ -75,10 +97,14 @@ namespace CppKnacker
             while (end_char < TextLength && Text[end_char] != '\n') ++end_char;
             // kiszûrjük a kommentblokkokat, azokat nem színezzük
             // külsõ kommentblokk szerinti szûkítés
-            for (; start_char <= end_char && IsInCommentBlock(start_char); ++start_char) ;
-            for (; end_char >= start_char && IsInCommentBlock(end_char); --end_char) ;
+            for (; start_char <= end_char && IsInComment(start_char); ++start_char) ;
+            for (; end_char >= start_char && IsInComment(end_char); --end_char) ;
             // belsõ kommentblokkokat a sztringeknek megfelelõen színezzük
             ColorizeInterval(start_char, end_char);
+            // ha van nyitó vagy csukó kommentjel a sorban, újraparse innentõl
+            if (Lines.Length > 0 && (Lines[line].Contains("/*") || Lines[line].Contains("*/")))
+                return line + 1;
+            return -1;
         }
         void ColorizeInterval(int startchar, int endchar)
         {
@@ -88,10 +114,10 @@ namespace CppKnacker
             // komment keresése
             endchar = ColorizeFrom("//", m_CommentColor, startchar, endchar);
             // sztring és c stílusú blokkok színezése
-            List<block> I1 = CollectIntervals('\"'.ToString(), '\"'.ToString(), startchar, endchar);
-            ColorizeBetweenBlocks(I1, m_StringColor );  // beszínezzük közöttük
-          //  List<block> I2 = CollectIntervals("/*", "*/", startchar, endchar);
-            foreach (block b in I1)
+            List<block> StringDelimitedBlocks = CollectIntervals('\"'.ToString(), '\"'.ToString(), startchar, endchar);
+            ColorizeBetweenBlocks(StringDelimitedBlocks, m_StringColor);  // beszínezzük közöttük
+            //  List<block> I2 = CollectIntervals("/*", "*/", startchar, endchar);
+            foreach (block b in StringDelimitedBlocks)
             {
                 // kulcsszavak színezése
                 foreach (string keyword in m_KeywordStrings)
@@ -106,11 +132,11 @@ namespace CppKnacker
         {
             for (int i = 1; i < b.Count; ++i)
             {
-                Select(b[i - 1].end, b[i].start - b[i - 1].end+1);
+                Select(b[i - 1].end, b[i].start - b[i - 1].end + 1);
                 SelectionColor = color;
             }
         }
-        // felvágja intervallumokra a szakaszt, a kihagyott részt színezé
+        // felvágja intervallumokra a szakaszt, a kihagyott részt színezi
         private List<block> CollectIntervals(string sm, string em, int startchar, int endchar)
         {
             List<block> intervals = new List<block>();
@@ -122,13 +148,14 @@ namespace CppKnacker
                 blockend = SafeFind(sm, blockend, endchar, RichTextBoxFinds.NoHighlight);
                 if (blockend == -1)
                     blockend = endchar;
-                // blokk felvétele
-                intervals.Add(new block(blockstart, blockend));
+                // blokk felvétele ha nincs kikommentezve
+                if (!IsInComment(blockstart) && !IsInComment(blockend))
+                    intervals.Add(new block(blockstart, blockend));
                 // blokkezdés beállítása
                 blockstart = SafeFind(em, blockend + sm.Length, endchar, RichTextBoxFinds.NoHighlight);
                 if (blockstart == -1)
                     blockstart = endchar;
-                blockend = blockstart + sm.Length;              
+                blockend = blockstart + sm.Length;
             }
             // lezáró blokk
             intervals.Add(new block(endchar - 1, endchar));
@@ -153,7 +180,7 @@ namespace CppKnacker
         // adott szó sor eleji elõfordulásának színezése
         void ColorizeStartWord(string word, Color clr, int from, int to)
         {
-            
+
             while (from < to)
             {
                 int startindex = FindWord(word, from, to, RichTextBoxFinds.NoHighlight | RichTextBoxFinds.MatchCase | RichTextBoxFinds.WholeWord);
@@ -187,39 +214,42 @@ namespace CppKnacker
             public int start;
             public int end;
         }
-        List<block> comments = new List<block>();
-        bool IsInCommentBlock(int charindex)
+        List<block> m_CommentBlocks = new List<block>();
+        bool IsInComment(int charindex)
         {
+            // kommentblokkok
             bool incomment = false;
-            for (int i = 0; !incomment && i < comments.Count; ++i)
-                incomment = comments[i].start + 1 < charindex && charindex < comments[i].end - 1;
+            for (int i = 0; !incomment && i < m_CommentBlocks.Count; ++i)
+                incomment = m_CommentBlocks[i].start <= charindex && charindex <= m_CommentBlocks[i].end + 1;
+
             return incomment;
         }
         void SetCommentBlocks() // beállítja a blokkokat
         {
-            comments.Clear();/**/
+            m_CommentBlocks.Clear();/**/
             int find = 0;
-            while (find!=-1)
+            while (find != -1)
             {
-                find = Find("/*", find, RichTextBoxFinds.NoHighlight);
+                find = SafeFind("/*", find, TextLength - 1, RichTextBoxFinds.NoHighlight);
                 if (find != -1)
                 {
                     block cb = new block();
                     cb.start = find;
                     // keressük meg a párját
-                    cb.end = SafeFind("*/", find+2, TextLength-1, RichTextBoxFinds.NoHighlight);
+                    cb.end = SafeFind("*/", find + 2, TextLength - 1, RichTextBoxFinds.NoHighlight);
                     if (cb.end == -1)
-                        cb.end = TextLength - 1;
-                    comments.Add(cb);
+                        cb.end = TextLength - 1;                
+                    m_CommentBlocks.Add(cb);
                     find = cb.end;
                 }
             }
         }
+
         void ColorizeCommentBlocks()
         {
-            for (int i = 0; i < comments.Count; ++i)
+            for (int i = 0; i < m_CommentBlocks.Count; ++i)
             {
-                Select(comments[i].start, comments[i].end - comments[i].start + 2);
+                Select(m_CommentBlocks[i].start, m_CommentBlocks[i].end - m_CommentBlocks[i].start + 2);
                 SelectionColor = m_CommentColor;
             }
         }
@@ -232,50 +262,27 @@ namespace CppKnacker
             int startindex = SafeFind(marker, from, to, RichTextBoxFinds.NoHighlight | RichTextBoxFinds.MatchCase);
             if (startindex != -1) // talált 
             {
-                last_non_colored_char = startindex-1;
-                this.Select(startindex, to-startindex+1);
+                last_non_colored_char = startindex - 1;
+                this.Select(startindex, to - startindex + 1);
                 this.SelectionColor = clr;
             }
             return last_non_colored_char;
         }
-        //////////////////////////////////////////////////////////////////////////
-        // adott blokkon belül minden színezése
-        void ColorizeBlock(string startmarker, string endmarker, Color clr, int from, int to)
-        {
-            while (from < to)
-            {
-                // keressük a blokkjel elejét
-                int startindex = SafeFind(startmarker, from, to, RichTextBoxFinds.NoHighlight | RichTextBoxFinds.MatchCase);
-                if (startindex == -1) // nincs több elõfordulás
-                    return;
-
-                int endindex = SafeFind(endmarker, startindex + startmarker.Length, to + 1, RichTextBoxFinds.NoHighlight | RichTextBoxFinds.MatchCase);
-                if (endindex == -1) // legvégig színezünk
-                    endindex = TextLength;
-                else
-                    endindex += endmarker.Length;
-                // színezés
-                this.Select(startindex, endindex - startindex+1);
-                this.SelectionColor = clr;
-                from = endindex;                
-            }
-        }
-        // kiegészítés karakterekre
-        void ColorizeBlock(char startmarker, char endmarker, Color clr, int from, int to)
-        {
-            ColorizeBlock(startmarker.ToString(), endmarker.ToString(), clr, from, to);
-        }
         // parse
+        int m_PreviousTextLength;
         bool m_NeedReparseAll = false;
         protected override void OnTextChanged(EventArgs e)
         {
-            Parse(m_NeedReparseAll);
+            SetCommentBlocks();
+            Parse(m_NeedReparseAll || System.Math.Abs(m_PreviousTextLength - TextLength) > 1);
             base.OnTextChanged(e);
+            m_PreviousTextLength = TextLength;
             m_NeedReparseAll = false;
         }
         //////////////////////////////////////////////////////////////////////////
         // villogás megszüntetése
         const short WM_PAINT = 0x00f;
+
         public static bool m_EnablePaint = true;
         override protected void WndProc(ref System.Windows.Forms.Message m)
         {
@@ -288,6 +295,68 @@ namespace CppKnacker
             }
             else
                 base.WndProc(ref m);
+        }
+        //////////////////////////////////////////////////////////////////////////
+        // scrollbar visszaállítására
+        [DllImport("user32.dll", CharSet = CharSet.Auto)]
+       // private static extern int SendMessage(IntPtr hWnd, int wMsg, IntPtr wParam, IntPtr lParam);
+        public static extern int SendMessage(IntPtr hWnd, int msg, int wParam, ref Point lParam);
+        //  lngResult = SendMessage(btn1.Handle, WM_LBUTTONUP, IntPtr.Zero, IntPtr.Zero);
+        const int WM_USER = 1024;
+        const int EM_GETSCROLLPOS = WM_USER + 221;
+        const int EM_SETSCROLLPOS = WM_USER + 222;
+        public Point ScrollPos
+        {
+            get
+            {
+                Point scrollPoint = new Point();
+                SendMessage(this.Handle, EM_GETSCROLLPOS, 0, ref scrollPoint);
+                return scrollPoint;
+            }
+            set
+            {
+                double _Yfactor = 1;
+                Point original = value;
+                if (original.Y < 0)
+                    original.Y = 0;
+                if (original.X < 0)
+                    original.X = 0;
+
+                Point factored = value;
+                factored.Y = (int)((double)original.Y * _Yfactor);
+
+                Point result = value;
+
+                SendMessage(this.Handle, EM_SETSCROLLPOS, 0, ref
+                factored);
+                SendMessage(this.Handle, EM_GETSCROLLPOS, 0, ref
+                result);
+
+                int loopcount = 0;
+                int maxloop = 100;
+                while (result.Y != original.Y)
+                {
+                    // Adjust the input.
+                    if (result.Y > original.Y)
+                        factored.Y -= (result.Y - original.Y) / 2 - 1;
+                    else if (result.Y < original.Y)
+                        factored.Y += (original.Y - result.Y) / 2 + 1;
+
+                    // test the new input.
+                    SendMessage(this.Handle, EM_SETSCROLLPOS, 0, ref
+                    factored);
+                    SendMessage(this.Handle, EM_GETSCROLLPOS, 0, ref
+                    result);
+
+                    // save new factor, test for exit.
+                    loopcount++;
+                    if (loopcount >= maxloop || result.Y == original.Y)
+                    {
+                        _Yfactor = (double)factored.Y / (double)original.Y;
+                        break;
+                    }
+                }
+            }
         }
     }
 
