@@ -101,9 +101,14 @@ namespace CppKnacker
             SelectRegion();
             if (m_RegionLength > 0)
             {
-                ((RichTextBox)this).Select(m_RegionStart, m_RegionLength);
-                ((RichTextBox)this).SelectionIndent += 3;
-                ((RichTextBox)this).DeselectAll();
+                int f = Find("\n", m_RegionStart, m_RegionStart + m_RegionLength - 1, RichTextBoxFinds.WholeWord);
+                if (f == -1)
+                    Text.Insert(m_RegionStart, "\n");
+                SelectionStart = f == -1 ? m_RegionStart + 1 : f + 1;
+                SelectionLength = m_RegionLength;
+                Select();
+                SelectionIndent += 9;
+                DeselectAll();
             }
         }
         //////////////////////////////////////////////////////////////////////////
@@ -138,14 +143,14 @@ namespace CppKnacker
                     if (ItsPair < Text.Length)  //ha megvan a parja
                     {
                         MessageBox.Show("start: " + m_RegionStart + ", ItsPair: " + ItsPair + ", Text.Length: " + Text.Length);
-                        m_RegionStart = f;
-                        m_RegionLength = ItsPair - f + 1;
+                        m_RegionStart = f + 1;
+                        m_RegionLength = ItsPair - f - 1;
                         MessageBox.Show("start: " + m_RegionStart + ", length: " + m_RegionLength);
                     }
                     else
                     {
-                        m_RegionStart = f;
-                        m_RegionLength = Text.Length - f;
+                        m_RegionStart = f + 1;
+                        m_RegionLength = Text.Length - f - 1;
                     }
                 }
                 else
