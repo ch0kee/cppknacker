@@ -1,5 +1,3 @@
-G++ fordító
-
 A fordító által létrehozott futtatható file a projekt könyvtárában a \bin könyvtáron belül jön létre, neve megegyezik a projekt nevével.
 
 A g++ fordító beállításait a Fordító menü Fordító beállítása... menüponttal érhetjük el.
