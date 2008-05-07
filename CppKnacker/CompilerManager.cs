@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Windows.Forms;
 using System.Diagnostics;
+using System.Xml;
 
 namespace CppKnacker
 {
@@ -10,23 +11,22 @@ namespace CppKnacker
     {
         //L EZ AZ SVN TÉMA BIZTOS NAGYON KIRÁLY Még beleraktam ezt a pár szót
         static string m_CompilerPath;
+        static string m_CompilerParameters;
         static Process m_CompilerExe = new Process();
-        static public void SetupCompilerPath( string compilerpath )
+        static public void SetupCompiler()
         {
-            m_CompilerPath = compilerpath;
-        }
-        // compiler készen van és be van állítva
-        static public bool CompilerOK
-        {
-            get
-            {
-                return (m_CompilerPath.Length > 0 && System.IO.File.Exists(m_CompilerPath));
-            }
+            XmlDocument doc = new XmlDocument();
+            doc.Load("options.xml");
+            XmlNode CppKnackerNode = doc.ChildNodes[0];
+            XmlNode CompilerNode = CppKnackerNode.ChildNodes[0];
+            m_CompilerPath = CompilerNode.Attributes["Path"].Value;
+            m_CompilerParameters = CompilerNode.Attributes["Parameters"].Value;
         }
         // a source nodeokból fordít
         static public bool Compile()
         {
-            if (m_CompilerPath == null)
+            SetupCompiler();
+            if (!System.IO.File.Exists(m_CompilerPath))
                 return false;
             // forrásfájlok lekérdezése és paraméter összeállítása
             IntelNodeSource[] sourcefiles = ProjectManager.SourceNodes;
@@ -39,7 +39,7 @@ namespace CppKnacker
             string exefile = ProjectManager.ProjectPath+@"\bin\"+System.IO.Path.GetFileNameWithoutExtension(ProjectManager.ProjectFile)+".exe";
             System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(exefile));
             // fordító beállítása
-            compiler_parameters += " -Wall -o "+exefile;
+            compiler_parameters += m_CompilerParameters + " -o "+exefile;
             m_CompilerExe.StartInfo.FileName = m_CompilerPath;
             m_CompilerExe.StartInfo.Arguments = compiler_parameters;
             m_CompilerExe.StartInfo.WorkingDirectory = ProjectManager.ProjectPath;

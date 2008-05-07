@@ -27,9 +27,6 @@ namespace CppKnacker
             string guessedpath = @"C:\MinGW\bin\g++.exe";
             if (System.IO.File.Exists(guessedpath))
             {
-                CompilerManager.SetupCompilerPath(guessedpath);
-                menuCompile.Enabled = true;
-
                 this.Text = m_MAINFORM_CAPTION;
             }
         }
@@ -140,8 +137,15 @@ namespace CppKnacker
         // exe fordítása
         private void menuCompile_Click(object sender, EventArgs e)
         {
-            ProjectManager.SaveProject(false);
-            menuRun.Enabled = CompilerManager.Compile();
+            if (!ProjectManager.ProjectIsOpened)
+                ProjectManager.Output.Write("Nincs nyitott projekt!");
+            else
+            {
+                ProjectManager.SaveProject(false);
+                if (!CompilerManager.Compile())
+                    ProjectManager.Output.Write("Ellenõrizze a fordító beállításait!");
+            }
+
         }
         //////////////////////////////////////////////////////////////////////////
         // lefordított exe futtatása
@@ -167,18 +171,11 @@ namespace CppKnacker
         }
         //////////////////////////////////////////////////////////////////////////
         //////////////////////////////////////////////////////////////////////////
-        // a szoftver bemutatásához átmeneti kiegészítések : by ch0kee
+        // fordító beállítása
         private void menuCompilerSettings_Click(object sender, EventArgs e)
         {
-            string guessedpath = @"C:\MinGW\bin\g++.exe";
-            if (System.IO.File.Exists(guessedpath))
-            {
-                CompilerManager.SetupCompilerPath(guessedpath);
-            }
-            else if (ShowFileDialog(new OpenFileDialog(), "g++ tallózása", "g++ alkalmazás (g++.exe)|g++.exe", CompilerManager.SetupCompilerPath))
-                menuCompile.Enabled = true;
-            if (CompilerManager.CompilerOK)// ha rendben van tiltsuk le a beállítások dialogot
-                menuCompilerSettings.Enabled = false;
+            CompilerSettings CompilerForm = new CompilerSettings();
+            CompilerForm.ShowDialog();
         }
 
         private void menuNevjegy_Click(object sender, EventArgs e)

@@ -48,6 +48,12 @@
     <Compile Include="CompilerOutBox.Designer.cs">
       <DependentUpon>CompilerOutBox.cs</DependentUpon>
     </Compile>
+    <Compile Include="CompilerSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="CompilerSettings.Designer.cs">
+      <DependentUpon>CompilerSettings.cs</DependentUpon>
+    </Compile>
     <Compile Include="EditorField.cs">
       <SubType>Component</SubType>
     </Compile>
@@ -88,6 +94,10 @@
     <EmbeddedResource Include="CompilerOutBox.resx">
       <SubType>Designer</SubType>
       <DependentUpon>CompilerOutBox.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CompilerSettings.resx">
+      <SubType>Designer</SubType>
+      <DependentUpon>CompilerSettings.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="HelpForm.resx">
       <SubType>Designer</SubType>
