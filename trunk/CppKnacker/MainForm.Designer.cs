@@ -234,41 +234,41 @@ namespace CppKnacker
             // kivágToolStripMenuItem
             // 
             this.kivágToolStripMenuItem.Name = "kivágToolStripMenuItem";
-            this.kivágToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.kivágToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.kivágToolStripMenuItem.Text = "Kivág";
             this.kivágToolStripMenuItem.Click += new System.EventHandler(this.kivágToolStripMenuItem_Click);
             // 
             // másolToolStripMenuItem
             // 
             this.másolToolStripMenuItem.Name = "másolToolStripMenuItem";
-            this.másolToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.másolToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.másolToolStripMenuItem.Text = "Másol";
             this.másolToolStripMenuItem.Click += new System.EventHandler(this.másolToolStripMenuItem_Click);
             // 
             // beszúrToolStripMenuItem
             // 
             this.beszúrToolStripMenuItem.Name = "beszúrToolStripMenuItem";
-            this.beszúrToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.beszúrToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.beszúrToolStripMenuItem.Text = "Beszúr";
             this.beszúrToolStripMenuItem.Click += new System.EventHandler(this.beszúrToolStripMenuItem_Click);
             // 
             // törölToolStripMenuItem
             // 
             this.törölToolStripMenuItem.Name = "törölToolStripMenuItem";
-            this.törölToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
+            this.törölToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.törölToolStripMenuItem.Text = "Töröl";
             this.törölToolStripMenuItem.Click += new System.EventHandler(this.törölToolStripMenuItem_Click);
             // 
             // toolStripSeparator6
             // 
             this.toolStripSeparator6.Name = "toolStripSeparator6";
-            this.toolStripSeparator6.Size = new System.Drawing.Size(159, 6);
+            this.toolStripSeparator6.Size = new System.Drawing.Size(163, 6);
             // 
             // mindenKiválasztToolStripMenuItem
             // 
             this.mindenKiválasztToolStripMenuItem.Name = "mindenKiválasztToolStripMenuItem";
-            this.mindenKiválasztToolStripMenuItem.Size = new System.Drawing.Size(162, 22);
-            this.mindenKiválasztToolStripMenuItem.Text = "Minden kiválaszt";
+            this.mindenKiválasztToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.mindenKiválasztToolStripMenuItem.Text = "Mindent kiválaszt";
             this.mindenKiválasztToolStripMenuItem.Click += new System.EventHandler(this.mindenKiválasztToolStripMenuItem_Click);
             // 
             // menuCompiling
