@@ -37,7 +37,6 @@ namespace CppKnacker
             this.menuAddFileToProject = new System.Windows.Forms.ToolStripMenuItem();
             this.fileRemoveFileFromProject = new System.Windows.Forms.ToolStripMenuItem();
             this.menuSaveFile = new System.Windows.Forms.ToolStripMenuItem();
-            this.menuSaveFileAs = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator4 = new System.Windows.Forms.ToolStripSeparator();
             this.menuOpenProject = new System.Windows.Forms.ToolStripMenuItem();
             this.menuNewProject = new System.Windows.Forms.ToolStripMenuItem();
@@ -117,7 +116,6 @@ namespace CppKnacker
             this.menuAddFileToProject,
             this.fileRemoveFileFromProject,
             this.menuSaveFile,
-            this.menuSaveFileAs,
             this.toolStripSeparator4,
             this.menuOpenProject,
             this.menuNewProject,
@@ -161,14 +159,6 @@ namespace CppKnacker
             this.menuSaveFile.Size = new System.Drawing.Size(267, 22);
             this.menuSaveFile.Text = "File mentés";
             this.menuSaveFile.Click += new System.EventHandler(this.menuSaveFile_Click);
-            // 
-            // menuSaveFileAs
-            // 
-            this.menuSaveFileAs.Name = "menuSaveFileAs";
-            this.menuSaveFileAs.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.D)));
-            this.menuSaveFileAs.Size = new System.Drawing.Size(267, 22);
-            this.menuSaveFileAs.Text = "File mentés másként...";
-            this.menuSaveFileAs.Click += new System.EventHandler(this.menuSaveFileAs_Click);
             // 
             // toolStripSeparator4
             // 
@@ -423,7 +413,6 @@ namespace CppKnacker
         private System.Windows.Forms.ToolStripMenuItem menuAddFileToProject;
         private System.Windows.Forms.ToolStripMenuItem fileRemoveFileFromProject;
         private System.Windows.Forms.ToolStripMenuItem menuSaveFile;
-        private System.Windows.Forms.ToolStripMenuItem menuSaveFileAs;
         private System.Windows.Forms.ToolStripSeparator toolStripSeparator4;
         private System.Windows.Forms.ToolStripMenuItem menuOpenProject;
         private System.Windows.Forms.ToolStripMenuItem menuNewProject;
