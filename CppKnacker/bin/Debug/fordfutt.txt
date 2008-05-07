@@ -1,1 +1,18 @@
 Fordítás és Futtatás
+
+A fenti parancsot csak a következö feltételek együttes fennálása esetén tudjuk érdemben használni :
+- van nyitott projektünk
+- vannak .cpp kiterjesztésü forrásfájljaink a projektben
+- be van állítva és létezö fájlra mutat a fordító elérési útja
+
+A funkciót elérhetjük az F5 megnyomásával is.
+
+A parancs lényegében egymásután végrehajtja a fordítás (ld.:G++ fordító) és a futtatás parancsokat.
+A fordító üzeneteit az alsó Kimeneti dobozban láthatjuk, figyelmeztetések és hibák esetén a megfelelö sorára kattintva a program megnyitja az adott filet.
+Miután lefutott a lefordított alkalmazásunk, a megnyittt konzolablak azonnal bezáródik, ezért ha az eredményt is látni szeretnénk, mindenképpen írjunk pl. egy billentyü leütésére váró kódot a programunk végére.
+
+Nem árt tisztában lenni azzal, hogy ha egyszer már sikeresen legeneráltuk az exe fájlt, akkor onnantól kezdve a fordítás eredményétöl függetlenül mindig el fog indulni erre a parancsra az alkalmazásunk.
+
+Egy Windows Vista alatti kompatibilitási hibára szeretnénk felhívni a figyelmet:
+- A projektet ugyanazon a partíción kell létrehozni, amelyiken a fordító van!
+
