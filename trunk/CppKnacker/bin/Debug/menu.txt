@@ -1,1 +1,56 @@
-Menü felépítése/használata
+Menüszerkezet:
+
+1. Fájl:
+   
+Új file…: Új forrásfájlt hoz létre
+
+File hozzáadás a projekthez…:  hozzáadja a kiválasztott létezõ forrásfájlt a megnyitott projekthez
+
+File elvétele a projektbõl…: kitörli a kiválasztott forrásfájlt a projektbõl
+
+File mentés: elmenti az aktív forrásfájlt
+
+Projekt megnyitás…: megnyit egy létezõ projektfájlt
+
+Projekt létrehozás…: létrehoz egy új projektet
+
+Projekt mentés: elmenti az aktuális projektet
+
+Projekt mentés másként…: elmenti más néven az aktuális projektet
+
+Projekt bezárás: bezárja a megnyitott projektet
+
+Kilépés: bezárja a programot
+
+
+2. Szerkesztés:
+
+Kivág
+
+Másol
+
+Beszúr
+
+Töröl
+
+Mindent kiválaszt
+
+
+3. Fordítás:
+
+   
+Fordítás és Futtatás
+   
+Fordítás
+
+Futtatás
+
+Beállítások…
+
+
+4. Segítség:
+
+   
+Kézikönyv
+
+Névjegy

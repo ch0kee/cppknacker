@@ -46,10 +46,11 @@ namespace CppKnacker
             // 
             this.sugodoboz.BackColor = System.Drawing.Color.White;
             this.sugodoboz.Cursor = System.Windows.Forms.Cursors.No;
-            this.sugodoboz.Location = new System.Drawing.Point(286, 58);
+            this.sugodoboz.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
+            this.sugodoboz.Location = new System.Drawing.Point(243, 58);
             this.sugodoboz.Name = "sugodoboz";
             this.sugodoboz.ReadOnly = true;
-            this.sugodoboz.Size = new System.Drawing.Size(326, 374);
+            this.sugodoboz.Size = new System.Drawing.Size(369, 374);
             this.sugodoboz.TabIndex = 0;
             this.sugodoboz.Text = "";
             // 
@@ -167,7 +168,7 @@ namespace CppKnacker
             // 
             this.tema.AutoSize = true;
             this.tema.Font = new System.Drawing.Font("Microsoft Sans Serif", 11F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(238)));
-            this.tema.Location = new System.Drawing.Point(420, 37);
+            this.tema.Location = new System.Drawing.Point(382, 37);
             this.tema.Name = "tema";
             this.tema.Size = new System.Drawing.Size(73, 18);
             this.tema.TabIndex = 3;
@@ -185,6 +186,7 @@ namespace CppKnacker
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ManualForm";
             this.Text = "Kézikönyv";
+            this.Load += new System.EventHandler(this.ManualForm_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.ResumeLayout(false);
