@@ -1,1 +1,1 @@
-Forrásfájlok kezelése
+Forrásfájlokat a fájl menüben tölthetünk be vagy hozhatunk létre. Ezek lehetnek cpp vagy header fájlok. A forrásfájlok szerkesztését a projektfában, a fájl nevén való dupla kattintással kezdhetjük el. A fájl menüben el is menthetjük õket, ha végeztünk a szerkesztésükkel. A fájlok bezárása a szerkesztõben használt jobb egérgombbal tehetõ meg.

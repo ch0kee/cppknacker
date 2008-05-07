@@ -1,1 +1,1 @@
-Szövegszerkesztõ kezelése
+A szövegszerkesztõ megnyitott forrásfájlnál válik elérhetõvé, mellyel módosíthatjuk egy fájl tartalmát vagy akár egy teljesen újat hozhatunk létre. A szövegszerkesztõnk-nek van jobb klikk menüje, amellyel a megszokott szerkesztõ mûveletek könnyen elérhetõek, ezen kívül a forrásfájlok bezárása és mentése is ezen keresztül történik. A szövegszerkesztõ írás közben beszínezi a C++ kulcsszavakat, mely teljesen automatikus, odafigyelést nem igényel.
