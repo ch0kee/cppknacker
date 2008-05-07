@@ -286,7 +286,6 @@ namespace CppKnacker
             // 
             // menuCompileAndRun
             // 
-            this.menuCompileAndRun.Enabled = false;
             this.menuCompileAndRun.Name = "menuCompileAndRun";
             this.menuCompileAndRun.ShortcutKeys = System.Windows.Forms.Keys.F5;
             this.menuCompileAndRun.Size = new System.Drawing.Size(193, 22);
@@ -300,7 +299,6 @@ namespace CppKnacker
             // 
             // menuCompile
             // 
-            this.menuCompile.Enabled = false;
             this.menuCompile.Name = "menuCompile";
             this.menuCompile.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F7)));
             this.menuCompile.Size = new System.Drawing.Size(193, 22);
@@ -309,7 +307,6 @@ namespace CppKnacker
             // 
             // menuRun
             // 
-            this.menuRun.Enabled = false;
             this.menuRun.Name = "menuRun";
             this.menuRun.ShortcutKeys = ((System.Windows.Forms.Keys)((System.Windows.Forms.Keys.Control | System.Windows.Forms.Keys.F5)));
             this.menuRun.Size = new System.Drawing.Size(193, 22);
@@ -325,7 +322,7 @@ namespace CppKnacker
             // 
             this.menuCompilerSettings.Name = "menuCompilerSettings";
             this.menuCompilerSettings.Size = new System.Drawing.Size(193, 22);
-            this.menuCompilerSettings.Text = "Fordító keresése...";
+            this.menuCompilerSettings.Text = "Fordító beállítása...";
             this.menuCompilerSettings.Click += new System.EventHandler(this.menuCompilerSettings_Click);
             // 
             // menuHelp
@@ -341,14 +338,14 @@ namespace CppKnacker
             // 
             this.menuManual.Name = "menuManual";
             this.menuManual.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.menuManual.Size = new System.Drawing.Size(152, 22);
+            this.menuManual.Size = new System.Drawing.Size(146, 22);
             this.menuManual.Text = "Kézikönyv";
             this.menuManual.Click += new System.EventHandler(this.menuManual_Click);
             // 
             // menuNevjegy
             // 
             this.menuNevjegy.Name = "menuNevjegy";
-            this.menuNevjegy.Size = new System.Drawing.Size(152, 22);
+            this.menuNevjegy.Size = new System.Drawing.Size(146, 22);
             this.menuNevjegy.Text = "Névjegy";
             this.menuNevjegy.Click += new System.EventHandler(this.menuNevjegy_Click);
             // 
