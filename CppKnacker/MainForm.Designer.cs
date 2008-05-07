@@ -335,7 +335,7 @@ namespace CppKnacker
             // 
             this.menuCompilerSettings.Name = "menuCompilerSettings";
             this.menuCompilerSettings.Size = new System.Drawing.Size(193, 22);
-            this.menuCompilerSettings.Text = "Beállítások...";
+            this.menuCompilerSettings.Text = "Fordító keresése...";
             this.menuCompilerSettings.Click += new System.EventHandler(this.menuCompilerSettings_Click);
             // 
             // menuHelp

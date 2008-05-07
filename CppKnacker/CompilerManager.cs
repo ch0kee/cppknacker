@@ -15,6 +15,14 @@ namespace CppKnacker
         {
             m_CompilerPath = compilerpath;
         }
+        // compiler készen van és be van állítva
+        static public bool CompilerOK
+        {
+            get
+            {
+                return (m_CompilerPath.Length > 0 && System.IO.File.Exists(m_CompilerPath));
+            }
+        }
         // a source nodeokból fordít
         static public bool Compile()
         {

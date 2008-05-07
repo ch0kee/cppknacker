@@ -189,10 +189,11 @@ namespace CppKnacker
             if (System.IO.File.Exists(guessedpath))
             {
                 CompilerManager.SetupCompilerPath(guessedpath);
-                menuCompile.Enabled = true;
             }
             else if (ShowFileDialog(new OpenFileDialog(), "g++ tallózása", "g++ alkalmazás (g++.exe)|g++.exe", CompilerManager.SetupCompilerPath))
                 menuCompile.Enabled = true;
+            if (CompilerManager.CompilerOK)// ha rendben van tiltsuk le a beállítások dialogot
+                menuCompilerSettings.Enabled = false;
         }
 
         private void menuNevjegy_Click(object sender, EventArgs e)
