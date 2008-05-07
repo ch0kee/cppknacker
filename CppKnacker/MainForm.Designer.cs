@@ -364,6 +364,7 @@ namespace CppKnacker
             // 
             // txtOutput
             // 
+            this.txtOutput.Cursor = System.Windows.Forms.Cursors.No;
             this.txtOutput.Location = new System.Drawing.Point(7, 549);
             this.txtOutput.Multiline = true;
             this.txtOutput.Name = "txtOutput";
