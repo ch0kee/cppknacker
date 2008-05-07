@@ -129,21 +129,6 @@ namespace CppKnacker
                 selectedpage.SaveContent(false);
             }
         }
-        // file mentése másként
-        private void menuSaveFileAs_Click(object sender, EventArgs e)
-        {
-      /* 
-            if (tabEditorTabs.SelectedTab != null)
-            {
-                EditorPage SelectedPage = tabEditorTabs.SelectedTab as EditorPage;
-                string FilterString = "";
-                if (SelectedPage.IsSourceFile)
-                    FilterString = SourceFileFilter;
-                else if (SelectedPage.IsHeaderFile)
-                    FilterString = HeaderFileFilter;
-                ShowFileDialog(new SaveFileDialog(), "File mentése másként", FilterString, SelectedPage.SaveContentAs);
-            }*/
-        }
         //////////////////////////////////////////////////////////////////////////
         // fordít és futtat
         private void menuCompileAndRun_Click(object sender, EventArgs e)
