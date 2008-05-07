@@ -115,7 +115,7 @@ namespace CppKnacker
             this.Controls.Add(this.btnBrowse);
             this.Name = "CompilerSettings";
             this.SizeGripStyle = System.Windows.Forms.SizeGripStyle.Hide;
-            this.Text = "CompilerSettings";
+            this.Text = "Fordító beállítása";
             this.Load += new System.EventHandler(this.CompilerSettings_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
