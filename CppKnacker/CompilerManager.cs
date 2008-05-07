@@ -16,7 +16,7 @@ namespace CppKnacker
         static public void SetupCompiler()
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load("options.xml");
+            doc.Load(MainForm.ProgramDirectory+"options.xml");
             XmlNode CppKnackerNode = doc.ChildNodes[0];
             XmlNode CompilerNode = CppKnackerNode.ChildNodes[0];
             m_CompilerPath = CompilerNode.Attributes["Path"].Value;

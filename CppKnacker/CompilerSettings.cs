@@ -30,7 +30,7 @@ namespace CppKnacker
         private void CompilerSettings_Load(object sender, EventArgs e)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load("options.xml");
+            doc.Load(MainForm.ProgramDirectory + "options.xml");
             XmlNode CppKnackerNode = doc.ChildNodes[0];
             XmlNode CompilerNode = CppKnackerNode.ChildNodes[0];
             txtPath.Text = CompilerNode.Attributes["Path"].Value;
@@ -40,12 +40,12 @@ namespace CppKnacker
         private void btnSaveAndExit_Click(object sender, EventArgs e)
         {
             XmlDocument doc = new XmlDocument();
-            doc.Load("options.xml");
+            doc.Load(MainForm.ProgramDirectory + "options.xml");
             XmlNode CppKnackerNode = doc.ChildNodes[0];
             XmlNode CompilerNode = CppKnackerNode.ChildNodes[0];
             CompilerNode.Attributes["Path"].Value = txtPath.Text;
             CompilerNode.Attributes["Parameters"].Value = txtParameters.Text;
-            doc.Save("options.xml");
+            doc.Save(MainForm.ProgramDirectory + "options.xml");
             Close();
         }
     }

@@ -19,6 +19,17 @@ namespace CppKnacker
         const string m_SOURCE_FILE_FILTER = "C++ Source File (*.cpp)|*.cpp";
         const string m_HEADER_FILE_FILTER = "C++ Header File (*.h)|*.h";
 
+        public static string ProgramDirectory
+        {
+            get
+            {
+                string dir = AppDomain.CurrentDomain.BaseDirectory;
+                if (!dir.EndsWith(@"\"))
+                    dir += @"\";
+                return dir;
+            }
+        }
+
         public MainForm()
         {
             InitializeComponent();

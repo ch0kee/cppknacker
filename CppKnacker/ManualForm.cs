@@ -20,7 +20,7 @@ namespace CppKnacker
             tema.Text = "Köszöntõ";
             tema.Location = new Point(382, 37);
             sugodoboz.Clear();
-            sugodoboz.LoadFile("koszonto.txt", RichTextBoxStreamType.PlainText);
+            sugodoboz.LoadFile(MainForm.ProgramDirectory + "koszonto.txt", RichTextBoxStreamType.PlainText);
         }
 
         private void menu_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -28,7 +28,7 @@ namespace CppKnacker
             tema.Text = "Menü felépítése és használata";
             tema.Location = new Point(321, 37);
             sugodoboz.Clear();
-            sugodoboz.LoadFile("menu.txt", RichTextBoxStreamType.PlainText);
+            sugodoboz.LoadFile(MainForm.ProgramDirectory + "menu.txt", RichTextBoxStreamType.PlainText);
         }
 
         private void szovegszerk_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -36,7 +36,7 @@ namespace CppKnacker
             tema.Text = "Szövegszerkesztõ kezelése";
             tema.Location = new Point(319, 37);
             sugodoboz.Clear();
-            sugodoboz.LoadFile("szovegszerk.txt", RichTextBoxStreamType.PlainText);
+            sugodoboz.LoadFile(MainForm.ProgramDirectory + "szovegszerk.txt", RichTextBoxStreamType.PlainText);
         }
 
         private void proj_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -44,7 +44,7 @@ namespace CppKnacker
             tema.Text = "Projektek kezelése";
             tema.Location = new Point(353, 37);
             sugodoboz.Clear();
-            sugodoboz.LoadFile("proj.txt", RichTextBoxStreamType.PlainText);
+            sugodoboz.LoadFile(MainForm.ProgramDirectory + "proj.txt", RichTextBoxStreamType.PlainText);
         }
 
         private void forras_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -52,7 +52,7 @@ namespace CppKnacker
             tema.Text = "Forrásfájlok kezelése";
             tema.Location = new Point(339, 37);
             sugodoboz.Clear();
-            sugodoboz.LoadFile("forras.txt", RichTextBoxStreamType.PlainText);
+            sugodoboz.LoadFile(MainForm.ProgramDirectory + "forras.txt", RichTextBoxStreamType.PlainText);
         }
 
         private void fordito_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -60,7 +60,7 @@ namespace CppKnacker
             tema.Text = "G++ fordító";
             tema.Location = new Point(376, 37);
             sugodoboz.Clear();
-            sugodoboz.LoadFile("fordito.txt", RichTextBoxStreamType.PlainText);
+            sugodoboz.LoadFile(MainForm.ProgramDirectory + "fordito.txt", RichTextBoxStreamType.PlainText);
         }
 
         private void fordfutt_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
@@ -68,13 +68,13 @@ namespace CppKnacker
             tema.Text = "Fordítás és Futtatás";
             tema.Location = new Point(346, 37);
             sugodoboz.Clear();
-            sugodoboz.LoadFile("fordfutt.txt", RichTextBoxStreamType.PlainText);
+            sugodoboz.LoadFile(MainForm.ProgramDirectory + "fordfutt.txt", RichTextBoxStreamType.PlainText);
         }
 
         private void ManualForm_Load(object sender, EventArgs e)
         {
             sugodoboz.Clear();
-            sugodoboz.LoadFile("koszonto.txt", RichTextBoxStreamType.PlainText);
+            sugodoboz.LoadFile(MainForm.ProgramDirectory + "koszonto.txt", RichTextBoxStreamType.PlainText);
         }
     }
 }
