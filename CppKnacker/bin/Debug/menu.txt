@@ -25,31 +25,29 @@ Kilépés: bezárja a programot
 
 2. Szerkesztés:
 
-Kivág
+Kivág: kivágja a vágólapra a kijelölt karaktereket
 
-Másol
+Másol: kimásolja a vágólapra a kijelölt karaktereket
 
-Beszúr
+Beszúr: beszúrja az adott pozícióhoz a vágólapon lévõ karaktereket
 
-Töröl
+Töröl: kitörli a kijelölt karaktereket
 
-Mindent kiválaszt
+Mindent kiválaszt: kijelöli az egész aktuális forrásfájlt
 
 
 3. Fordítás:
-
    
-Fordítás és Futtatás
+Fordítás és Futtatás: elõször lefordítja a forrásfájlokat, aztán pedig lefuttatja az elkészült .exe fájlt
    
-Fordítás
+Fordítás: lefordítja a forrásfájlokat
 
-Futtatás
+Futtatás: lefuttatja az elkészült .exe-t
 
-Beállítások…
+Fordító beállítása…: beállítja a g++.exe elérési útját valamint a fordítóparamétereket
 
 
 4. Segítség:
-
    
 Kézikönyv
 

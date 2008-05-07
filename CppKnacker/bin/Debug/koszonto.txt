@@ -1,1 +1,7 @@
-Köszöntõ
+Tisztelt Felhasználó!
+
+Köszönjük, hogy szoftverünket választotta! Azon törekedtünk a fejlesztés során, hogy kényelmesebb munkakörülményeket biztosítsunk a fejlesztõk számára. A szoftver könnyû kezelhetõsége és grafikus mivolta hatására a fejlesztõi munka gyorsabb lesz. Felgyorsult életünkben az idõ pénz, tehát velünk idõt és pénzt takarít meg. Reméljük nem csalódik! A baloldali témakörökre kattintva megtudhat többet a szoftverrõl, ha esetleg segítségre lenne szüksége.
+
+Tisztelettel:
+
+Fejlesztõk
