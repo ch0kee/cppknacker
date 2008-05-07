@@ -1,1 +1,18 @@
 G++ fordító
+
+A fordító által létrehozott futtatható file a projekt könyvtárában a \bin könyvtáron belül jön létre, neve megegyezik a projekt nevével.
+
+A g++ fordító beállításait a Fordító menü Fordító beállítása... menüponttal érhetjük el.
+
+Beállítások:
+- Elérési út: A g++.exe elérési útja. (pl.:C:\MinGW\g++.exe)
+A Tallózás gombra nyomva módosítható az értéke
+- Paraméterezés: Akárcsak parancssorból hívva a fordítót, a C++ Knacker felületén keresztül is élvezhetjük a g++ kapcsolóinak gazdag tárházát.
+
+A g++ fordító sok opciója közül van néhány, melynek bekapcsolásával további figyelmeztetéseket kaphatunk a programunkban található kerülendõ elemekrõl (pl. felesleges deklarációk, ISO szabványtól való eltérés, stb.)
+
+Ajánlott paraméterezés: "-W -Wall -pedantic -ansi"
+
+Ha máskor nem, legalább akkor, ha már ezek nélkül lefordul és jól is fut a programunk, érdemes a fenti kapcsolókkal is lefordítanunk, hogy lássuk van-e esetleg valami a kódunkban, amit illene kijavítanunk. 
+
+További információ : http://gcc.gnu.org/
