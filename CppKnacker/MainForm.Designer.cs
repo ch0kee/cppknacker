@@ -351,13 +351,14 @@ namespace CppKnacker
             // 
             this.menuManual.Name = "menuManual";
             this.menuManual.ShortcutKeys = System.Windows.Forms.Keys.F1;
-            this.menuManual.Size = new System.Drawing.Size(146, 22);
+            this.menuManual.Size = new System.Drawing.Size(152, 22);
             this.menuManual.Text = "Kézikönyv";
+            this.menuManual.Click += new System.EventHandler(this.menuManual_Click);
             // 
             // menuNevjegy
             // 
             this.menuNevjegy.Name = "menuNevjegy";
-            this.menuNevjegy.Size = new System.Drawing.Size(146, 22);
+            this.menuNevjegy.Size = new System.Drawing.Size(152, 22);
             this.menuNevjegy.Text = "Névjegy";
             this.menuNevjegy.Click += new System.EventHandler(this.menuNevjegy_Click);
             // 

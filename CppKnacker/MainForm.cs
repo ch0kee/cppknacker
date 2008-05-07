@@ -233,6 +233,12 @@ namespace CppKnacker
                 ProjectManager.ActiveTab.Editor.SelectAll();
         }
 
+        private void menuManual_Click(object sender, EventArgs e)
+        {
+            ManualForm newmanualform = new ManualForm();
+            newmanualform.ShowDialog();
+        }
+
      
     }
 }
