@@ -40,6 +40,7 @@ namespace CppKnacker
             {
                 this.Text = m_MAINFORM_CAPTION;
             }
+            
         }
         //////////////////////////////////////////////////////////////////////////
         // új projekt létrehozása **
@@ -230,6 +231,53 @@ namespace CppKnacker
         {
             ManualForm newmanualform = new ManualForm();
             newmanualform.ShowDialog();
+        }
+
+        private void toolStripButton1_Click(object sender, EventArgs e)
+        {
+            ProjectForm NewProjectForm = new ProjectForm();
+            if (NewProjectForm.ShowDialog() == DialogResult.OK)
+                ProjectManager.CreateNewProject(NewProjectForm.ProjectPath);
+
+        }
+
+        private void toolStripButton7_Click(object sender, EventArgs e)
+        {
+            ShowFileDialog(new SaveFileDialog(), "Új forrásfile létrehozása", SourceFileFilter, ProjectManager.AddFileToProject);
+        }
+
+        private void toolStripButton6_Click(object sender, EventArgs e)
+        {
+            ShowFileDialog(new SaveFileDialog(), "Új headerfile létrehozása", HeaderFileFilter, ProjectManager.AddFileToProject);
+
+        }
+
+        private void toolStripButton5_Click(object sender, EventArgs e)
+        {
+            // ezek a hívások egyszerûsödni fognak, ha lesz saját EditorNode osztályunk TreeNode helyett
+            if (ProjectManager.SelectedNode() is IntelNodeSource || ProjectManager.SelectedNode() is IntelNodeHeader)
+                treeProjectTree.SelectedNode.Remove();  // majd kiveszi a tabot is a saját EditorNode osztály
+
+        }
+
+        private void toolStripButton4_Click(object sender, EventArgs e)
+        {
+            if (tabEditorTabs.SelectedTab != null)
+            {
+                EditorPage SelectedPage = tabEditorTabs.SelectedTab as EditorPage;
+                SelectedPage.SaveContent(false);
+            }
+
+        }
+
+        private void toolStripButton3_Click(object sender, EventArgs e)
+        {
+            for (int TabIndex = 0; TabIndex < tabEditorTabs.Controls.Count; ++TabIndex)
+            {
+                EditorPage SelectedPage = tabEditorTabs.Controls[TabIndex] as EditorPage;
+                SelectedPage.SaveContent(false);
+            }
+
         }
 
      
